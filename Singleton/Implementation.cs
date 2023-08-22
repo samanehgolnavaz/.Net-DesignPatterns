@@ -18,18 +18,19 @@ namespace Singleton
         private static readonly Lazy<Logger> LazyLogger
             = new Lazy<Logger>(() => new Logger());
 
-        private static Logger? _instance;
+       // private static Logger? _instance;
 
         public static Logger Instance
         {
 
             get
             {
-                if (_instance==null)
-                {
-                    _instance=new Logger();
-                }
-                return _instance;
+                return LazyLogger.Value;
+                //if (_instance==null)
+                //{
+                //    _instance=new Logger();
+                //}
+                //return _instance;
             } 
         }
         protected Logger()

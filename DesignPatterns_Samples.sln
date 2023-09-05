@@ -19,15 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Builder", "04-Builder", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Prototype", "05-Prototype", "{F6675145-E70D-4DB2-B362-0B56E3865D73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "Singleton\Singleton.csproj", "{2BA802FC-6C1B-4CAE-B81D-A8B3C9F726A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singleton\Singleton.csproj", "{2BA802FC-6C1B-4CAE-B81D-A8B3C9F726A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{7EDF3EE3-66FF-428B-9ECC-62B05908E509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{7EDF3EE3-66FF-428B-9ECC-62B05908E509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactory", "AbstractFactory\AbstractFactory.csproj", "{DCE7EEF3-420C-4971-B725-34F8CDE936DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactory", "AbstractFactory\AbstractFactory.csproj", "{DCE7EEF3-420C-4971-B725-34F8CDE936DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{23C6768E-6BBE-4F24-A4D6-FFEAA4F9FED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Builder", "Builder\Builder.csproj", "{23C6768E-6BBE-4F24-A4D6-FFEAA4F9FED5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype", "Prototype\Prototype.csproj", "{576DE6C0-602D-4DF4-BC94-F584452FB515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prototype", "Prototype\Prototype.csproj", "{576DE6C0-602D-4DF4-BC94-F584452FB515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.csproj", "{53A22253-CAD2-4537-88DC-46D20A335DBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Adapter", "01-Adapter", "{BA2C7BF4-2E8D-48F4-9ED8-078DCE71D118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{576DE6C0-602D-4DF4-BC94-F584452FB515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{576DE6C0-602D-4DF4-BC94-F584452FB515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{576DE6C0-602D-4DF4-BC94-F584452FB515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53A22253-CAD2-4537-88DC-46D20A335DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53A22253-CAD2-4537-88DC-46D20A335DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53A22253-CAD2-4537-88DC-46D20A335DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53A22253-CAD2-4537-88DC-46D20A335DBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +78,8 @@ Global
 		{DCE7EEF3-420C-4971-B725-34F8CDE936DB} = {E121A6E6-71AB-407B-A6DA-9C56D6ACA14A}
 		{23C6768E-6BBE-4F24-A4D6-FFEAA4F9FED5} = {960945A8-01A7-4FB1-B117-EC2533B46C2E}
 		{576DE6C0-602D-4DF4-BC94-F584452FB515} = {F6675145-E70D-4DB2-B362-0B56E3865D73}
+		{53A22253-CAD2-4537-88DC-46D20A335DBB} = {BA2C7BF4-2E8D-48F4-9ED8-078DCE71D118}
+		{BA2C7BF4-2E8D-48F4-9ED8-078DCE71D118} = {FC284F77-8BBD-4E14-975B-26E15462BBF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95C8F1A8-73EB-48DF-8B22-1047C696E6D6}

@@ -1,4 +1,4 @@
-﻿namespace Adapter
+﻿namespace ClassAdapter
 {
     internal class Program
     {

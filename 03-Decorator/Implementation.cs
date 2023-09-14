@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _03_Decorator
+namespace Decorator
 {
     /// <summary>
     /// Component(as interface)

@@ -1,4 +1,4 @@
-﻿namespace _03_Decorator
+﻿namespace Decorator
 {
     internal class Program
     {

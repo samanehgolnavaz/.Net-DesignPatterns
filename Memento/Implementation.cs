@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace Command
+namespace Memento
 {
     public class Employee
     {
@@ -29,7 +28,7 @@ namespace Command
     /// </summary>
     public interface IEmployeeManagerRepository
     {
-        void AddEmployee(int managerId,Employee employee);
+        void AddEmployee(int managerId, Employee employee);
         void RemoveEmployee(int managerId, Employee employee);
 
         void HasEmployee(int managerId, int employeeId);
@@ -47,17 +46,17 @@ namespace Command
 
         public void AddEmployee(int managerId, Employee employee)
         {
-           _managers.First(m => m.Id==managerId).Employees.Add(employee);
+            _managers.First(m => m.Id == managerId).Employees.Add(employee);
         }
         public void HasEmployee(int managerId, int employeeId)
         {
             _managers.First(m => m.Id == managerId)
              .Employees.Any(e => e.Id == employeeId);
         }
-        public void RemoveEmployee(int managerId,Employee employee)
+        public void RemoveEmployee(int managerId, Employee employee)
         {
             _managers.First(m => m.Id == managerId).Employees.Remove(employee);
-        }   
+        }
         public void WriteDataStore()
         {
             foreach (var manager in _managers)
@@ -65,7 +64,7 @@ namespace Command
                 Console.WriteLine($"Manager {manager.Id},{manager.Name}");
                 if (manager.Employees.Any())
                 {
-                    foreach(var employee in manager.Employees)
+                    foreach (var employee in manager.Employees)
                     {
                         Console.WriteLine($"\t Employee {employee.Id},{employee.Name}");
                     }
@@ -88,13 +87,27 @@ namespace Command
         void Undo();
     }
     /// <summary>
-    /// ConcreteCommand
+    /// Memento
     /// </summary>
-    public class AddEmployeeToManagerList:ICommand
+    public class AddEmployeeToManagerListMemento
+    {
+        public int ManagerId { get; set; }
+        public Employee? Employee { get; set; }
+        public AddEmployeeToManagerListMemento(int managerId,Employee? employee)
+        {
+            ManagerId=managerId;
+            Employee = employee;
+        }
+    }
+
+    /// <summary>
+    /// ConcreteCommand & Originator
+    /// </summary>
+    public class AddEmployeeToManagerList : ICommand
     {
         private readonly IEmployeeManagerRepository _employeeManagerRepository;
-        private readonly int _managerId;
-        private readonly Employee? _employee;
+        private  int _managerId;
+        private  Employee? _employee;
 
         public AddEmployeeToManagerList(
             IEmployeeManagerRepository employeeManagerRepository,
@@ -105,10 +118,23 @@ namespace Command
             _managerId = managerId;
             _employee = employee;
         }
+
+
+        public AddEmployeeToManagerListMemento CreateMemento()
+        {
+            return new AddEmployeeToManagerListMemento(_managerId,_employee);
+        }
+
+        public void RestoreMemento(AddEmployeeToManagerListMemento memento)
+        {
+            _managerId = memento.ManagerId;
+            _employee=memento.Employee;
+        }
+   
         public bool CanExecute()
         {
             //employee should'nt be null
-            if (_employee==null )
+            if (_employee == null)
             {
                 return false;
             }
@@ -123,15 +149,15 @@ namespace Command
         }
         public void Execute()
         {
-            if (_employee==null)
+            if (_employee == null)
             {
                 return;
             }
-            _employeeManagerRepository.AddEmployee(_managerId,_employee);
+            _employeeManagerRepository.AddEmployee(_managerId, _employee);
         }
         public void Undo()
         {
-            if (_employee==null)
+            if (_employee == null)
             {
                 return;
             }
@@ -140,34 +166,43 @@ namespace Command
         }
     }
     /// <summary>
-    /// Invoker
+    /// Invoker  & Caretaker
     /// </summary>
     public class CommandManager
     {
-        private readonly Stack<ICommand> _commands= new Stack<ICommand>();
+        private readonly Stack<AddEmployeeToManagerListMemento> _mementos = new();
+        private AddEmployeeToManagerList? _command;
         public void Invoke(ICommand command)
         {
+            //if the command has not benn stored yet, store it -we will
+            //reuse it instead of storing different instances
+            if (_command==null)
+            {
+                _command = (AddEmployeeToManagerList)command;
+            }
+
             if (command.CanExecute())
             {
                 command.Execute();
-                _commands.Push(command);
+                _mementos.Push(((AddEmployeeToManagerList)command).CreateMemento());
             }
         }
         public void Undo()
         {
-            if (_commands.Any())
+            if (_mementos.Any())
             {
-                _commands.Pop()?.Undo();
+                _command?.RestoreMemento(_mementos.Pop());
+                _command?.Undo();
             }
         }
         public void UndoAll()
         {
-            while (_commands.Any())
+            while (_mementos.Any())
             {
-                _commands.Pop()?.Undo();
+                _command?.RestoreMemento(_mementos.Pop());
+                _command?.Undo();
             }
         }
 
     }
-
 }
